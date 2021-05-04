@@ -27,7 +27,7 @@ int is_palindrome(listint_t **head)
 		forward = *head;
 		for (iter2 = 1; iter2 < length - iter; iter2++)
 			forward = forward->next;
-		if (foraward->n != backward->n)
+		if (forward->n != backward->n)
 			return (0);
 		backward = backward->next;
 	}
