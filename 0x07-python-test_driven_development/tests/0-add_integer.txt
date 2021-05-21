@@ -1,0 +1,149 @@
+Add integer
+================
+    >>>import os
+    ### Import add_integer from 0-add_integer module.
+    >>> add_integer = __import__('0-add_integer').add_integer
+    
+    #========REQUIREMENT TESTS========#
+
+    ###Module documentation
+    >>> len('0-add-integer'.__doc__) > 10
+    True
+
+    ###Function
+    >>> len(add_integer.__doc__) > 10
+    True
+
+    ### New line at EOF
+    >>> os.popen('cat -e 0-add_integer.py | tail -1').read()[-1]
+    '\n'
+
+    ### File contains shebang line
+    >>> os.popen('cat 0-add_integer.py | head -1').read()
+    '#!/usr/bin/python3\n'
+
+    ### No pep8 error
+    >>>os.popen("pep8 0-add_integer.py").read()
+    ''
+
+    ### Execute file permissions
+    >>> import os
+    >>> os.access('0-add_integer.py', os.X_OK)
+    True
+
+    ### README in cwd 
+    >>> cwd = os.getcwd()
+    >>> path = cwd + '/README.md'
+    >>> os.path.exists(path)
+    True
+
+    #========INT TESTS========#
+
+    ### int & int 
+    >>> add_integer(3, 3)
+    6
+
+    ### -int & int
+    >>> add_integer(-3, 3)
+    0
+
+    ### int & -int
+    >>> add_integer(3, -3)
+    0
+
+    ### -int & -int
+    >>> add_integer(-3, -3)
+    -6
+
+    #=========FLOAT TESTS========# 
+
+    ### float & float
+    >>> add_integer(3.2, 3.2)
+    6
+
+    ### float & -float
+    >>> add_integer(3.2, -3.2)
+    0
+
+    ### -float & float
+    >>> add_integer(-3.2, 3.2)
+    0
+
+    ### -float & -float
+    >>> add_integer(-3.2, -3.2)
+    -6
+
+    #========INT FLOAT TESTS========#
+
+    ### int & float 
+    >>> add_integer(3, 3.2)
+    6
+
+    ### float & int
+    >>> add_integer(3.2, 3)
+    6
+
+    ### int & -float
+    >>> add_integer(3, -3.2)
+    0
+
+    ### -float & int
+    >>> add_integer(-3.2, 3)
+    0
+
+    ### -int & float
+    >>> add_integer(-3, 3.2)
+    0
+
+    ### -int & -float
+    >>> add_integer(-3, -3.2)
+    -6
+
+    #========WACKY TESTS========#
+
+    ### sqrt neg 1
+    >>> add_integer(3j)
+    Traceback(most recent call last):
+    ...
+    TypeError: a must be an integer
+
+    ### what if boolean
+    >>> add_integer(True, 1)
+    Traceback(most recent call last):
+    ...
+    TypeError: a must be an integer
+
+    ### infinity a
+    >>> add_integer(10e+1000, 1)
+    Traceback(most recent call last):
+    ...
+    TypeError: a must be an integer
+
+    ### infinity b
+    >>> add_integer(1, 10e+1000)
+    Traceback(most recent call last):
+    ...
+    TypeError: b must be an integer
+
+    ### NaN
+    >>> add_integer(1, (10e+1000 / 10e+1000))
+    Traceback (most recent call last):
+    ...
+    ValueError: NaN float cannot be converted
+
+    ### String
+    >>> add_integer("A string")
+    Traceback (most recent call last):
+    ...
+    TypeError: a must be an integer
+
+    ### Too many args
+    >>> add_integer(1, 2, 3)
+    Traceback (most recent call last):
+    ...
+    TypeError: add_integer() takes 2 arguments, 3 given
+
+    ### No args
+    >>> add_integer()
+    Traceback (most recent call last):
+    TypeError: missing required argument a

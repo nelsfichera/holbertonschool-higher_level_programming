@@ -1,0 +1,53 @@
+The ``3-say_my_name`` module
+============================
+
+    >>> import os
+
+    ### Import say_my_name from 3-say_my_name module.
+    >>> say_my_name = __import__('3-say_my_name').say_my_name
+
+
+    #========REQ TESTS=========#
+
+    ### Module documentation.
+    >>> len('3-say_my_name'.__doc__) > 10
+    True
+
+    ### Function documentation.
+    >>> len(say_my_name.__doc__) > 10
+    True
+
+    ### New line at the end of the file.
+    >>> os.popen('cat -e 3-say_my_name.py | tail -1').read()[-1]
+    '\n'
+
+    ### File contains the proper shebang.
+    >>> os.popen('cat 3-say_my_name.py | head -1').read()
+    '#!/usr/bin/python3\n'
+
+    ### No error from pep8
+    >>> os.popen("pep8 3-say_my_name.py").read()
+    ''
+
+    ### Executable file permissions.
+    >>> import os
+    >>> os.access('3-say_my_name.py', os.X_OK)
+    True
+
+    ### README exists on current directory.
+    >>> cwd = os.getcwd()
+    >>> path = cwd + '/README.md'
+    >>> os.path.exists(path)
+    True
+
+    #========WACKY TEST========#
+
+    >>> say_my_name()
+    Traceback (most recent call last):
+    ...
+    TypeError: say_my_name() missing 1 required  argument: 'first_name'
+
+        >>> say_my_name(12, "White")
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string

@@ -1,0 +1,129 @@
+The ``4-print_square`` module
+============================
+    >>> import os
+
+    ### Import add_integer from 0-add_integer module.
+    >>> print_square = __import__('4-print_square').print_square
+
+
+    #========REQ TESTS=========#
+
+    ### Module documentation.
+    >>> len('4-print_square'.__doc__) > 10
+    True
+
+    ### Function documentation.
+    >>> len(print_square.__doc__) > 10
+    True
+
+    ### New line at the end of the file.
+    >>> os.popen('cat -e 4-print_square.py | tail -1').read()[-1]
+    '\n'
+
+    ### File contains the proper shebang.
+    >>> os.popen('cat 4-print_square.py | head -1').read()
+    '#!/usr/bin/python3\n'
+
+    ### No error from pep8
+    >>> os.popen("pep8 4-print_square.py").read()
+    ''
+
+    ### Executable file permissions.
+    >>> import os
+    >>> os.access('4-print_square.py', os.X_OK)
+    True
+
+    ### README exists on current directory.
+    >>> cwd = os.getcwd()
+    >>> path = cwd + '/README.md'
+    >>> os.path.exists(path)
+    True
+
+    #========MAIN=========#
+
+    ### Test 2: Size 4
+    >>> print_square(4)
+    ####
+    ####
+    ####
+    ####
+
+    ### Test 3: Size 10
+    >>> print_square(10)
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+
+    ### Test 4: Size 0
+    >>> print_square(0)
+
+    ### Test 5: Size 1
+    >>> print_square(1)
+    #
+
+    ### Test 2: Size -1
+    >>> print_square(-1)
+    Traceback (most recent call last):
+    ...
+    ValueError: size must be >= 0
+
+    ### no args
+    >>> print_square()
+    Traceback (most recent call last):
+    ...
+    TypeError: print_square() missing 1 required positional argument: 'size'
+
+    ### Check for a float number
+    >>> print_square(1.2)
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer
+
+    ### String
+    >>> print_square("four")
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer
+
+    ##### Check for a None
+    >>> print_square(None)
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer
+
+    ##### Check for a boolean
+    >>> print_square(True)
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer
+
+    ##### Check for a str
+    >>> print_square({"size" : 4})
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer
+
+    ##### Check for inf
+    >>> print_square(100e+1000)
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer
+
+    ##### Check for NaN
+    >>> print_square(100e+1000 / 100e+1000)
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer
+
+    ##### Check for operation
+    >>> print_square(20 / 5)
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer

@@ -1,0 +1,164 @@
+``2-matrix_divided`` module
+============================
+
+    >>> import os
+
+    ### Import matrix_divided from 2-matrix_divided module.
+    >>> matrix_divided = __import__('2-matrix_divided').matrix_divided
+
+
+    #========REQ TESTS========#
+
+    ### Module documentation.
+    >>> len('2-matrix_divided'.__doc__) > 10
+    True
+
+    ### Function documentation.
+    >>> len(matrix_divided.__doc__) > 10
+    True
+
+    ### New line at the end of the file.
+    >>> os.popen('cat -e 2-matrix_divided.py | tail -1').read()[-1]
+    '\n'
+
+    ### File contains the proper shebang.
+    >>> os.popen('cat 2-matrix_divided.py | head -1').read()
+    '#!/usr/bin/python3\n'
+
+    ### No error from pep8
+    >>> os.popen("pep8 2-matrix_divided.py").read()
+    ''
+
+    ### Executable file permissions.
+    >>> import os
+    >>> os.access('2-matrix_divided.py', os.X_OK)
+    True
+
+    ### README exists on current directory.
+    >>> cwd = os.getcwd()
+    >>> path = cwd + '/README.md'
+    >>> os.path.exists(path)
+    True
+
+    #========INT TESTS========#
+
+    ### negative ints in matrix
+    >>> matrix_divided([[-1, -2, -3], [-4, -5, -6]], 3)
+    [[-0.33, -0.67, -1.0], [-1.33, -1.67, -2.0]]
+
+    ### negative div
+    >>> matrix_divided([[1, 2, 3], [4, 5, 6]], -3)
+    [[-0.33, -0.67, -1.0], [-1.33, -1.67, -2.0]]
+
+    ### negative ints in matrix
+    >>> matrix_divided([[-1, -2, -3], [-4, -5, -6]], 3)
+    [[-0.33, -0.67, -1.0], [-1.33, -1.67, -2.0]]
+
+    ### negative ints in matrix and div
+    >>> matrix_divided([[-1, -2, -3], [-4, -5, -6]], -3)
+    [[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
+
+
+    #=========FLOAT TESTS=========#
+
+    ### - / +
+    >>> matrix_divided([[-2.0, -2.0, -2.0], [-2.0, -2.0, -2.0]], 2.0)
+    [[-1.0, -1.0, -1.0], [-1.0, -1.0, -1.0]]
+
+    ### - / -
+    >>> matrix_divided([[-2.0, -2.0, -2.0], [-2.0, -2.0, -2.0]], -2.0)
+    [[1.0, 1.0, 1.0], [1.0, 1.0, 1.0]]
+
+    ### + / -
+    >>> matrix_divided([[2.0, 2.0, 2.0], [2.0, 2.0, 2.0]], -2.0)
+    [[-1.0, -1.0, -1.0], [-1.0, -1.0, -1.0]]
+
+    ### + / +
+    >>> matrix_divided([[2.0, 2.0, 2.0], [2.0, 2.0, 2.0]], 2.0)
+    [[1.0, 1.0, 1.0], [1.0, 1.0, 1.0]]
+
+    #========WACKY TESTS===========#
+
+    ### inf
+    >>> matrix_divided([[1, 100e+1000, 3], [4, 5.6, 6]], 2)
+    [[0.5, inf, 1.5], [2.0, 2.8, 3.0]]
+
+    ### -inf
+    >>> matrix_divided([[1, -100e+1000, 3], [4, 5.6, 6]], 2)
+    [[0.5, -inf, 1.5], [2.0, 2.8, 3.0]]
+
+    ### NaN
+    >>> matrix_divided([[1, 100e+1000, 3], [4, 5.6, 6]], 100e+1000)
+    [[0.0, nan, 0.0], [0.0, 0.0, 0.0]]
+
+    ### Limit to zero
+    >>> matrix_divided([[1, 2, 3], [4, 5.6, 6]], 100e+1000)
+    [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+
+    ### Limit to -zero
+    >>> matrix_divided([[1, 2, 3], [-4, 5.6, 6]], -100e+1000)
+    [[-0.0, -0.0, -0.0], [0.0, -0.0, -0.0]]
+
+    ### div by 0
+    >>> matrix_divided([[1, 2, 3], [4, 5, 6]], 3)
+    [[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
+
+    ### string in matrix
+    >>> matrix_divided([["string", 2, 3], [4, 5, 6]], 3)
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+    ### int / int
+    >>> matrix_divided(25, 5)
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+    ### boolean freak
+    >>> matrix_divided([[1, True, 3], [4, 5, 6]], 3)
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+    ### quotient boolean freak
+    >>> matrix_divided([[1, 2, 3], [4, 5, 6]], False)
+    Traceback (most recent call last):
+    ...
+    TypeError: div must be a number
+
+    ### None
+    >>> matrix_divided([[1, None, 3], [4, 5, 6]], 3)
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+    ##### Check when a NoneType is passed as divisor #####
+    >>> matrix_divided([[1, 2, 3], [4, 5, 6]], None)
+    Traceback (most recent call last):
+    ...
+    TypeError: div must be a number
+
+    ### empty list as matrix.
+    >>> matrix_divided([], 3)
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+    ### emtpy lists inside matrix
+    >>> matrix_divided([[],[]], 3)
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+    ### 3 arguments
+    >>> matrix_divided([[1, 2, 3], [4, 5, 6]], 3, 3)
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix_divided() takes 2 positional arguments but 3 were given
+
+    ### no div
+    >>> matrix_divided([[1, 2, 3], [4, 5, 6]])
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix_divided() missing 1 required positional argument: 'div'
