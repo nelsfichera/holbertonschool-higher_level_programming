@@ -36,7 +36,7 @@ class Square:
     @size.setter
     def size(self, value):
         '''sets the value of square instance'''
-        if isinstance(value, (int)) is Trrue:
+        if isinstance(value, (int)) is True:
             if value < 0:
                 raise ValueError("size must be >= 0")
             else:
