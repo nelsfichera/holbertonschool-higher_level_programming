@@ -1,0 +1,48 @@
+>>> bg = BaseGeometry()
+>>> bg.integer_validator("my_int", 12)
+
+>>> bg.integer_validator("width", 89)
+
+>>> bg.integer_validator("name", "John")
+Traceback (most recent call last):
+...
+TypeError: name must be an integer
+
+>>> BaseG = __import__("7-base_geometry").BaseGeometry
+
+>>> a = BaseG()
+>>> ivalid = a.integer_validator
+
+>>> ivalid("my_int", 12)
+
+>>> ivalid("width", 89)
+ 
+>>> ivalid("", 12)
+
+>>> a.area()
+Traceback (most recent call last):
+Exception: area() is not implemented
+
+>>> ivalid()
+Traceback (most recent call last):
+TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+
+>>> ivalid(50)
+Traceback (most recent call last):
+TypeError: integer_validator() missing 1 required positional argument: 'value'
+
+>>> ivalid("", 12)
+
+>>> ivalid("name", "string")
+Traceback (most recent call last):
+TypeError: name must be an integer
+>>> ivalid("name", None)
+Traceback (most recent call last):
+TypeError: name must be an integer
+>>> ivalid("name", {3, 1})
+Traceback (most recent call last):
+TypeError: name must be an integer
+>>> ivalid("name", ())
+Traceback (most recent call last):
+TypeError: name must be an integer
+>>> ivalid("name", [])
