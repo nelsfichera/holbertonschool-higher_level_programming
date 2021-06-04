@@ -4,6 +4,6 @@ import json
 
 
 def load_from_jston_file(filename):
-    '''does the thing of creating the thing but longer json object'''
+    '''creates an object from a json file no permissions management'''
     with open(filename, encoding="utf-8") as the_file:
         return json.load(the_file)
