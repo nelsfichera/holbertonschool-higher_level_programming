@@ -68,14 +68,14 @@ class Base:
 
         if list_objs is None:
             list_objs = []
-        if cls.__name__ is "Rectangle":
+        if cls.__name__ == "Rectangle":
             list_objs = ([getattr(obj, i) for i in rect] for obj in list_objs)
             with open(name, "w") as the_file:
                 write = csv.writer(the_file)
                 for a in list_objs:
                     write.writerow(a)
 
-        if cls.__name__ is "Square":
+        if cls.__name__ == "Square":
             list_objs = ([getattr(obj, i) for i in sq] for obj in list_objs)
             with open(name, "w") as the_file:
                 write = csv.writer(the_file)
