@@ -33,7 +33,7 @@ class Rectangle(Base):
 
     def positive_validation(self, value, name):
         '''validates the value is positive'''
-        if (value) is not int:
+        if type(value) is not int:
             raise TypeError("{} must be an integer".format(name))
         if value < 0:
             raise ValueError("{} must be >= 0".format(name))
