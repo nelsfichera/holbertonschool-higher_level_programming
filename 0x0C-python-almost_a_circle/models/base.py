@@ -37,9 +37,9 @@ class Base:
     def save_to_file(cls, list_objs):
         '''saves json rep of list_objs to a file'''
         with open("{}.json".format(cls.__name__), 'w+') as file:
-             dict_list = [obj.to_dictionary() for obj in list_objs]
-             json_str = cls.to_json_string(dict_list)
-             file.write(json_str)
+            dict_list = [obj.to_dictionary() for obj in list_objs]
+            json_str = cls.to_json_string(dict_list)
+            file.write(json_str)
 
     @classmethod
     def create(cls, **dictionary):
