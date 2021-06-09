@@ -42,25 +42,25 @@ class RectangleTest(unittest.TestCase):
         '''test for type error'''
         r2 = Rectangle(1, 1, 1, 1)
         with self.assertRaises(TypeError):
-            r.width = "e"
+            r2.width = "e"
         with self.assertRaises(TypeError):
-            r.height = "4"
+            r2.height = "4"
         with self.assertRaises(TypeError):
-            r.x = "9"
+            r2.x = "9"
         with self.assertRaises(TypeError):
-            r.y = "5"
+            r2.y = "5"
 
     def test_valueerror(self):
         '''test value error'''
         r3 = Rectangle(1, 1, 1, 1)
         with self.assertRaises(ValueError):
-            r.width = 0
+            r3.width = 0
         with self.assertRaises(ValueError):
-            r.height = -1
+            r3.height = -1
         with self.assertRaises(ValueError):
-            r.x = -3
+            r3.x = -3
         with self.assertRaises(ValueError):
-            r.y = -2
+            r3.y = -2
 
     def test_area(self):
         '''test for area'''
@@ -75,7 +75,7 @@ class RectangleTest(unittest.TestCase):
         report = pep8style.check_files(["models/rectangle.py"])
         self.ae(result.total_errors, 0, "Found errors")
 
-def test_display_0(self):
+    def test_display_0(self):
         """tests simple display"""
         expected = "####\n####\n####\n####\n####\n####\n"
         with patch('sys.stdout', new=StringIO()) as fake_out:

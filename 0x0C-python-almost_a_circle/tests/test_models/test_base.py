@@ -10,7 +10,7 @@ import json
 
 
 class BaseTest(unittest.TestCase):
-   '''test base methods'''
+    '''test base methods'''
 
     def test_id(self):
         '''test for num of instances and args'''
@@ -21,10 +21,10 @@ class BaseTest(unittest.TestCase):
         b5 = Base()
 
         self.assertEqual(b1.id, 1)
-	self.assertEqual(b2.id, 2)
+        self.assertEqual(b2.id, 2)
         self.assertEqual(b3.id, 3)
-	self.assertEqual(b4.id, 12)
-	self.assertEqual(b5.id, 4)
+        self.assertEqual(b4.id, 12)
+        self.assertEqual(b5.id, 4)
 
     def test_negative(self):
         '''tests bad values'''
@@ -39,16 +39,17 @@ class BaseTest(unittest.TestCase):
         r1 = Rectangle(10, 7, 2, 8, 5)
         dictionary = r1.to_dictionary()
         json_dictionary = Base.to_json_string([dictionary])
-        self.ae(dictionary, test_dict)
+        self.assertEqual(dictionary, test_dict)
 
         json2 = Base.to_json_string(None)
-        self.ae(json_2, "[]")
+        self.assertEqual(json2, "[]")
 
     def test_pep8(self):
         '''test to conform'''
         pep8style = pep8.StyleGuide(quiet=True)
-        report = pep8style.check_files("models/base.py"])
+        report = pep8style.check_files(["models/base.py"])
         self.assertEqual(report.total_errors, 0, "Found errors")
+
 
 if __name__ == '__main__':
     unittest.main()

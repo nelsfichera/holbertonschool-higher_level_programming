@@ -3,6 +3,8 @@
 
 import pep8
 import unittest
+from unittest.mock import patch
+from io import StringIO
 import models.base
 import models.rectangle
 import models.square
@@ -19,7 +21,7 @@ class SquareTest(unittest.TestCase):
         """setup assertEquals"""
 
         self.ae = self.assertEqual
-	Base._Base__nb_objects = 0
+        Base._Base__nb_objects = 0
 
     def test_value_square(self):
         """test normal values"""
