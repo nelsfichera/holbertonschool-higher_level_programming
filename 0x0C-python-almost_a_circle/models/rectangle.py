@@ -9,9 +9,13 @@ class Rectangle(Base):
     def __init__(self, width, height, x=0, y=0, id=None):
         '''constructs the class rectangle'''
         super().__init__(id)
-        self.__width = width
+        self.size_validation(width, "width")
+	self.__width = width
+        self.size_validation(height, "height")
         self.__height = height
+        self.positive_validation(x, "x")
         self.__x = x
+        self.positive_validation(y, "y")
         self.__y = y
 
     def __str__(self):
