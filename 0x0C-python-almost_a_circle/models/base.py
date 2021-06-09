@@ -20,7 +20,7 @@ class Base:
     @staticmethod
     def to_json_string(list_dictionaries):
         '''json string rep of dicts'''
-        if list_dictionaries == None or list_dictionaries == {}:
+        if list_dictionaries is None or list_dictionaries == {}:
             return "[]"
         return json.dumps(list_dictionaries)
 
@@ -29,28 +29,25 @@ class Base:
         '''returns list from json string'''
         if type(json_string) == dict:
             return json_string
-        if json_string == None or json_string == '':
+        if json_string is None or json_string == '':
             return []
         return json.loads(json_string)
 
     @classmethod
     def save_to_file(cls, list_objs):
         '''saves json rep of list_objs to a file'''
-        if list_objs == None or list_objes == []:
+        if list_objs is None or list_objs == []:
             file.write('[]')
         else:
             dictionaries = []
             for x in list_objs:
                 dictionaries.append(x.to_dictionary())
-            file.write(Base.to_json_string(dictionaries)
+            file.write(Base.to_json_string(dictionaries))
 
     @classmethod
     def create(cls, **dictionary):
         '''returns instance with attributes already set'''
-        if (cls.__name__ == "Rectangle"):
-            mannequin = cls(1, 1)
-        if (cls.__name__ == "Square"):
-            mannequin = cls(1)
+        mannequin = cls(1, 1)
         mannequin.update(**dictionary)
         return mannequin
 
@@ -59,7 +56,7 @@ class Base:
         '''returns a list of instances'''
         try:
             filename = cls.__name__ + ".json"
-            with open(filename, mode= 'r') as the_file:
+            with open(filename, mode='r') as the_file:
                 content = cls.from_json_string(file.read())
                 instances = []
                 for x in content:
