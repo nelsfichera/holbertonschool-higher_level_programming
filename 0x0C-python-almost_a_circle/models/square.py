@@ -34,9 +34,9 @@ class Square(Rectangle):
         '''returns dictionary representation of the square'''
         return {
             "id": self.id,
-            "size": self.__width,
-            "x": self.__x,
-            "y": self.__y
+            "size": self.size,
+            "x": self.x,
+            "y": self.y
         }
 
     def update(self, *args, **kwargs):
