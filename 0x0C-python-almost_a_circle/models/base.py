@@ -13,31 +13,35 @@ class Base:
         if id is not None:
             self.id = id
         else:
-            Base.__nb_objects += 1
-            self.id = Base.__nb_objects
+            __class__.__nb_objects += 1
+            self.id = __class__.__nb_objects
 
     @staticmethod
     def to_json_string(list_dictionaries):
         '''json string rep of dicts'''
-        if list_dictionaries is None or len(list_dictionaries) < 1:
+        if list_dictionaries == None or list_dictionaries =={}:
             return "[]"
         return json.dumps(list_dictionaries)
 
     @staticmethod
     def from_json_string(json_string):
         '''returns list from json string'''
-        if json_string is None or len(json_string) < 1:
+        if type(json_string) == dict:
+            return json_string
+        if json_string == None or json_string == '':
             return []
         return json.loads(json_string)
 
     @classmethod
     def save_to_file(cls, list_objs):
         '''saves json rep of list_objs to a file'''
-        if list_objs is None:
-            list_objs = []
-        filename = cls.__name__ + ".json"
-        with open(filename, mode="w", encoding="utf-8") as the_file:
-            the_file.write(cls.to_json_string(list_objs))
+        if list_objs == None or list_objes == []:
+            file.write('[]')
+        else:
+            dictionaries = []
+            for x in list_objs:
+                dictionaries.append(x.to_dictionary())
+            file.write(Base.to_json_string(dictionaries)
 
     @classmethod
     def create(cls, **dictionary):
@@ -54,8 +58,12 @@ class Base:
         '''returns a list of instances'''
         try:
             filename = cls.__name__ + ".json"
-            with open(filename, encoding="utf-8") as the_file:
-                return cls.create(cls.from_json_string(the_file))
+            with open(filename, mode= 'r') as the_file:
+                content = cls.from_json_string(file.read())
+                instances = []
+                for x in content:
+                    instances.append(cls.create(**x))
+                return instances
         except FileNotFoundError:
             return []
 
