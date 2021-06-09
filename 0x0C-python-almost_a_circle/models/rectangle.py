@@ -9,13 +9,9 @@ class Rectangle(Base):
     def __init__(self, width, height, x=0, y=0, id=None):
         '''constructs the class rectangle'''
         super().__init__(id)
-        self.size_validation(width, "width")
-	self.__width = width
-        self.size_validation(height, "height")
+        self.__width = width
         self.__height = height
-        self.positive_validation(x, "x")
         self.__x = x
-        self.positive_validation(y, "y")
         self.__y = y
 
     def __str__(self):
@@ -28,20 +24,6 @@ class Rectangle(Base):
             self.__height
         )
 
-    def size_validation(self, value, name):
-        '''validates the value for size'''
-        if type(value) is not int:
-            raise TypeError("{} must be an integer".format(name))
-        if value <= 0:
-            raise ValueError("{} must be > 0".format(name))
-
-    def positive_validation(self, value, name):
-        '''validates the value is positive'''
-        if type(value) is not int:
-            raise TypeError("{} must be an integer".format(name))
-        if value < 0:
-            raise ValueError("{} must be >= 0".format(name))
-
     @property
     def width(self):
         '''gets width'''
@@ -50,7 +32,10 @@ class Rectangle(Base):
     @width.setter
     def width(self, value):
         '''sets width'''
-        self.size_validation(value, "width")
+        if type(value) is not int:
+            raise TypeError("width must be an integer")
+        elif value <= 0:
+            raise ValueError("width must be > 0")
         self.__width = value
 
     @property
@@ -61,7 +46,10 @@ class Rectangle(Base):
     @height.setter
     def height(self, value):
         '''sets height'''
-        self.size_validation(value, "height")
+        if type(value) is not int:
+            raise TypeError("height must be an integer")
+        elif value <= 0:
+            raise ValueError("height must be > 0")
         self.__height = value
 
     @property
@@ -72,7 +60,10 @@ class Rectangle(Base):
     @x.setter
     def x(self, value):
         '''sets x'''
-        self.positive_validation(value, "x")
+        if type(value) is not int:
+            raise TypeError("x must be an integer")
+        elif value < 0:
+            raise ValueError("x must be >= 0")
         self.__x = value
 
     @property
@@ -83,7 +74,10 @@ class Rectangle(Base):
     @y.setter
     def y(self, value):
         '''sets y'''
-        self.positive_validation(value, "y")
+        if type(value) is not int:
+            raise TypeError("y must be an integer")
+        elif value < 0:
+            raise ValueError("y must be >= 0")
         self.__y = value
 
     def area(self):
