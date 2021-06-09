@@ -54,3 +54,7 @@ class BaseTest(unittest.TestCase):
         pep8style = pep8.StyleGuide(quiet=True)
         report = pep8style.check_files("models/base.py"])
         self.ae(report.total_errors, 0, "Found errors")
+
+if __name__ == '__main__':
+    unittest.main()
+    from ...models.base import Base
