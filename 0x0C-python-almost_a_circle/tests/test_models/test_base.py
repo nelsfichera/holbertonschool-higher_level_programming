@@ -3,14 +3,10 @@
 
 import pep8
 import unittest
-import models.base
-import models.rectangle
-import models.square
+from models.base import Base
+from models.rectangle import Rectangle
+from models.square import Square
 import json
-
-Base = models.base.Base
-Rectangle = models.rectangle.Rectangle
-Square = models.square.Square
 
 
 class BaseTest(unittest.TestCase):
