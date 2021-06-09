@@ -36,13 +36,10 @@ class Base:
     @classmethod
     def save_to_file(cls, list_objs):
         '''saves json rep of list_objs to a file'''
-        if list_objs is None or list_objs == []:
-            file.write('[]')
-        else:
-            dictionaries = []
-            for x in list_objs:
-                dictionaries.append(x.to_dictionary())
-            file.write(Base.to_json_string(dictionaries))
+        with open("{}.json".format(cls.__name__), 'w+') as file:
+             dict_list = [obj.to_dictionary() for obj in list_objs]
+             json_str = cls.to_json_string(dict_list)
+             file.write(json_str)
 
     @classmethod
     def create(cls, **dictionary):
@@ -57,7 +54,7 @@ class Base:
         try:
             filename = cls.__name__ + ".json"
             with open(filename, mode='r') as the_file:
-                content = cls.from_json_string(file.read())
+                content = cls.from_json_string(the_file.read())
                 instances = []
                 for x in content:
                     instances.append(cls.create(**x))
