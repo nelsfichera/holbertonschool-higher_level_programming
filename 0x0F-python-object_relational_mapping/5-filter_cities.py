@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''lists all cities from database hbtn_0e_0_usa'''
+'''takes name of state as argument and lists cities'''
 import MySQLdb
 import sys
 
@@ -13,12 +13,12 @@ if __name__ == "__main__":
     )
     c = db.cursor()
     c.execute(
-        """SELECT cities.id, cities.name, states.name FROM cities
+        """SELECT cities.name FROM cities
         JOIN states ON cities.state_id = states.id
-        ORDER BY 'cities.id' ASC;"""
+        WHERE states.name=%s
+        ORDER BY 'cities.id' ASC;""", (sys.argv[4], )
     )
     record = c.fetchall()
-    for row in record:
-        print("({}, \'{}\', \'{}\')".format(row[0], row[1], row[2]))
+    print(", ".join(row[0] for row in record))
     c.close()
     db.close()
