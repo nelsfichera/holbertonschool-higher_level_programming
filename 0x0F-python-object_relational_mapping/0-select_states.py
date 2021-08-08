@@ -14,6 +14,7 @@ if __name__ == "__main__":
 
     c = db.cursor()
     c.execute("""SELECT * FROM states ORDER BY states.id ASC;""")
+    record=c.fetchall()
     for row in record:
         print("({}, \'{}\')".format(row[0], row[1]))
     c.close()
