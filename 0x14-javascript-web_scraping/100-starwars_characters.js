@@ -11,5 +11,5 @@ GET(url, (err, res, body) => {
   movies.characters.forEach(charUrl => GET(charUrl, (err, res, body) => {
     if (err) return (console.log(err));
     console.log(JSON.parse(body).name);
-    }));
+  }));
 });

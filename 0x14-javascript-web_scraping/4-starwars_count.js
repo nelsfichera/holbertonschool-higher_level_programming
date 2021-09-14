@@ -12,8 +12,8 @@ GET(url, (err, res, body) => {
     for (let n = 0; n < movies[x].characters.length; n++) {
       if (movies[x].characters[n].includes('18')) {
         count++;
-	}
       }
     }
-    console.log(count);
+  }
+  console.log(count);
 });
